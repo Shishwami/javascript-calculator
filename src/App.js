@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -73,10 +74,16 @@ function App() {
     },
   }
 
+  const [solution,updateSolution] = useState("");
+  const [output,updateOutput] = useState("0");
 
   return (
     <div className="App" >
       <div id="calculator">
+        <div id="display">
+          <p id="solution">{solution}</p>
+          <p id="output">{output}</p>
+        </div>
         {
           Object.keys(buttons).map((index) => {
             const button = buttons[index];
