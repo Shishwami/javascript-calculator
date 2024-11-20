@@ -1,23 +1,93 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const buttons = {
+    1: {
+      id: "clear",
+      value: "AC"
+    },
+    2: {
+      id: "divide",
+      value: "/"
+    },
+    3: {
+      id: "multiply",
+      value: "*"
+    },
+    4: {
+      id: "seven",
+      value: "7"
+    },
+    5: {
+      id: "eight",
+      value: "8"
+    },
+    6: {
+      id: "nine",
+      value: "9"
+    },
+    7: {
+      id: "subtract",
+      value: "-"
+    },
+    8: {
+      id: "five",
+      value: "4"
+    },
+    9: {
+      id: "five",
+      value: "5"
+    },
+    10: {
+      id: "six",
+      value: "6"
+    },
+    11: {
+      id: "add",
+      value: "+"
+    },
+    12: {
+      id: "one",
+      value: "1"
+    },
+    13: {
+      id: "two",
+      value: "2"
+    },
+    14: {
+      id: "three",
+      value: "3"
+    },
+    15: {
+      id: "equals",
+      value: "="
+    },
+    16: {
+      id: "zero",
+      value: "0"
+    },
+    17: {
+      id: "decimal",
+      value: "."
+    },
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      <div id="calculator">
+        {
+          Object.keys(buttons).map((index) => {
+            const button = buttons[index];
+            return (
+              <button id={button.id} key={index} className='keyBtns'>
+                {button.value}
+              </button>
+            )
+          })
+        }
+      </div>
     </div>
   );
 }
