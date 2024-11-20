@@ -21,6 +21,10 @@
   min-height: calc(var(--calc-width)/var(--calc-columns));
 }
 
+#calculator #display {
+  grid-column: span 4;
+}
+
 #calculator #clear, #calculator #zero {
   grid-column: span 2;
 }
