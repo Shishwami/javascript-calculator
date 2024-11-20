@@ -1,0 +1,32 @@
+:root {
+    --calc-width: 250px;
+    --calc-columns: 4;
+}
+
+.App{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#calculator {
+    display: grid;
+    grid-template-columns: repeat(var(--calc-columns), 1fr);
+    gap: 5px;
+    width: var(--calc-width);
+
+    .keyBtns {
+        min-height: calc(var(--calc-width)/var(--calc-columns));
+    }
+
+    #clear, #zero {
+        grid-column: span 2;
+    }
+
+    #equals{
+        grid-row: span 2;
+    }
+
+
+}
