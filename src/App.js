@@ -74,7 +74,7 @@ function App() {
     },
   }
 
-  const [solution,updateSolution] = useState("");
+  const [solution,updateSolution] = useState(" ");
   const [output,updateOutput] = useState("0");
 
   return (
