@@ -85,52 +85,67 @@ function App() {
   const [result, updateResult] = useState(null);
 
   const buttonClick = (value) => {
-
     if (value == "AC") {
-      updateSolution(defaultSolution);
-      updateSolutionDisplay(defaultSolution);
-      updateOutput(defaultOutput);
-      updateResult(null);
+      handleClear();
     } else if (value === "=") {
-      try {
+      handleEvaluation();
+    } else if (/[+\-*/]$/.test(value)) {
+      handleOperators(value);
+    } else if (value === ".") {
+      handleDecimal(value);
+    } else {
+      handleNumbers(value);
+    }
+  }
 
-       
+  const handleClear = () => {
+    updateSolution(defaultSolution);
+    updateSolutionDisplay(defaultSolution);
+    updateOutput(defaultOutput);
+    updateResult(null);
+  }
 
+  const handleEvaluation = () => {
+    try {
+      if (solution) {
         const newResult = evaluate(solution)
-        console.log("EVALUATING:", solution, "\tResult:", newResult);
+        console.log("Sol:", solution, "\t Res:", newResult);
+
         updateResult(newResult);
         updateOutput(newResult);
         updateSolution(defaultSolution);
-
-        
-      } catch (error) {
-        return
-      }
-
-    } else if (/[+\-*/]$/.test(value)) {
-      if (result == null) {
-        const newSolution = solution + value;
-        updateSolutionDisplay(newSolution);
-        updateSolution(newSolution);
-        updateOutput(defaultOutput);
-        updateResult(null);
-      }
-      else {
-        const newResult = result + value;
         updateSolutionDisplay(newResult);
-        updateSolution(newResult);
-        updateOutput(defaultOutput);
+
       }
-
-    } else {
-      const newOutput = output === "0" ? value : output + value;
-      const newSolution = solution + value;
-      updateSolutionDisplay(newSolution);
-      updateSolution(newSolution);
-      updateSolution(solution + value);
-      updateOutput(newOutput);
+    } catch (error) {
+      return
     }
+  }
 
+  const handleOperators = (value) => {
+
+    let newSolution = solution + value;
+
+    updateSolutionDisplay(newSolution);
+    updateSolution(newSolution);
+    updateOutput(newSolution);
+  }
+
+  const handleDecimal = (value) => {
+    let newSolution = solution + value;
+
+    updateSolutionDisplay(newSolution);
+    updateSolution(newSolution);
+    updateOutput(newSolution);
+  }
+
+  const handleNumbers = (value) => {
+
+    const newSolution = solution === "0" ? value : solution + value;
+
+    updateSolutionDisplay(newSolution);
+    updateSolution(newSolution);
+    updateOutput(newSolution);
   }
 
   return (
