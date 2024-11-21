@@ -27,13 +27,13 @@
   border: 2px solid white;
 }
 
-#calculator #display {
+#calculator #displayContainer {
   grid-column: span 4;
   background-color: lightgrey;
   padding: 5px;
 }
 
-#calculator #display p {
+#calculator #displayContainer p {
   margin: 0;
   text-indent: 10px;
   font-size: 20px;
