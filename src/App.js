@@ -83,6 +83,7 @@ function App() {
   const [solutionDisplay, updateSolutionDisplay] = useState(defaultSolution);
   const [output, updateOutput] = useState(defaultOutput);
   const [result, updateResult] = useState(null);
+  const [hasDecimal, updateHasDecimal] = useState(false);
 
   const buttonClick = (value) => {
     if (value == "AC") {
@@ -102,6 +103,7 @@ function App() {
     updateSolution(defaultSolution);
     updateSolutionDisplay(defaultSolution);
     updateOutput(defaultOutput);
+    updateHasDecimal(false);
     updateResult(null);
   }
 
@@ -123,6 +125,7 @@ function App() {
   }
 
   const handleOperators = (value) => {
+    updateHasDecimal(false);
 
     let newSolution = solution + value;
 
@@ -132,11 +135,18 @@ function App() {
   }
 
   const handleDecimal = (value) => {
+
+    if (hasDecimal) {
+      return
+    }
+
     let newSolution = solution + value;
 
     updateSolutionDisplay(newSolution);
     updateSolution(newSolution);
     updateOutput(newSolution);
+    updateHasDecimal(true);
+
   }
 
   const handleNumbers = (value) => {
