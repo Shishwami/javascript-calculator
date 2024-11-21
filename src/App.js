@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { evaluate, re } from 'mathjs';
+
 import './App.css';
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
       value: "-"
     },
     8: {
-      id: "five",
+      id: "four",
       value: "4"
     },
     9: {
@@ -74,8 +76,46 @@ function App() {
     },
   }
 
-  const [solution,updateSolution] = useState(" ");
-  const [output,updateOutput] = useState("0");
+  const defaultSolution = " "
+  const defaultOutput = ""
+
+  const [solution, updateSolution] = useState(defaultSolution);
+  const [output, updateOutput] = useState(defaultOutput);
+  const [result, updateResult] = useState(null);
+
+  const buttonClick = (value) => {
+
+    if (value == "AC") {
+      updateSolution(defaultSolution);
+      updateOutput(defaultOutput);
+      updateResult(null);
+    } else if (value === "=") {
+      try {
+        let newResult = evaluate(solution)
+        updateResult(newResult);
+        updateOutput(newResult)
+      } catch (error) {
+        return
+      }
+
+    } else if (/[+\-*/]$/.test(value)) {
+      console.log(result);
+      if (result == null) {
+        updateSolution(solution + value);
+        updateOutput("");
+        updateResult(null);
+      }
+      else {
+        updateSolution(result + value);
+        updateOutput("");
+      }
+
+    } else {
+      updateSolution(solution + value);
+      updateOutput(output + value);
+    }
+
+  }
 
   return (
     <div className="App" >
@@ -88,7 +128,11 @@ function App() {
           Object.keys(buttons).map((index) => {
             const button = buttons[index];
             return (
-              <button id={button.id} key={index} className='keyBtns'>
+              <button
+                id={button.id}
+                onClick={() => buttonClick(button.value)}
+                key={index}
+                className='keyBtns'>
                 {button.value}
               </button>
             )
