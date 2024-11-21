@@ -76,10 +76,11 @@ function App() {
     },
   }
 
-  const defaultSolution = " "
-  const defaultOutput = ""
+  const defaultSolution = ""
+  const defaultOutput = "0"
 
   const [solution, updateSolution] = useState(defaultSolution);
+  const [solutionDisplay, updateSolutionDisplay] = useState(defaultSolution);
   const [output, updateOutput] = useState(defaultOutput);
   const [result, updateResult] = useState(null);
 
@@ -87,32 +88,47 @@ function App() {
 
     if (value == "AC") {
       updateSolution(defaultSolution);
+      updateSolutionDisplay(defaultSolution);
       updateOutput(defaultOutput);
       updateResult(null);
     } else if (value === "=") {
       try {
-        let newResult = evaluate(solution)
+
+       
+
+        const newResult = evaluate(solution)
+        console.log("EVALUATING:", solution, "\tResult:", newResult);
         updateResult(newResult);
-        updateOutput(newResult)
+        updateOutput(newResult);
+        updateSolution(defaultSolution);
+
+        
       } catch (error) {
         return
       }
 
     } else if (/[+\-*/]$/.test(value)) {
-      console.log(result);
       if (result == null) {
-        updateSolution(solution + value);
-        updateOutput("");
+        const newSolution = solution + value;
+        updateSolutionDisplay(newSolution);
+        updateSolution(newSolution);
+        updateOutput(defaultOutput);
         updateResult(null);
       }
       else {
-        updateSolution(result + value);
-        updateOutput("");
+        const newResult = result + value;
+        updateSolutionDisplay(newResult);
+        updateSolution(newResult);
+        updateOutput(defaultOutput);
       }
 
     } else {
+      const newOutput = output === "0" ? value : output + value;
+      const newSolution = solution + value;
+      updateSolutionDisplay(newSolution);
+      updateSolution(newSolution);
       updateSolution(solution + value);
-      updateOutput(output + value);
+      updateOutput(newOutput);
     }
 
   }
@@ -120,9 +136,9 @@ function App() {
   return (
     <div className="App" >
       <div id="calculator">
-        <div id="display">
-          <p id="solution">{solution}</p>
-          <p id="output">{output}</p>
+        <div id="displayContainer">
+          <p id="solution">{solutionDisplay}</p>
+          <p id="display">{output}</p>
         </div>
         {
           Object.keys(buttons).map((index) => {
