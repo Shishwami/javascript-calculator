@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { evaluate, re } from 'mathjs';
+import { evaluate } from 'mathjs';
 
 import './App.css';
 
@@ -78,19 +78,20 @@ function App() {
 
   const defaultSolution = "";
   const defaultOutput = "0";
-  const maxOperator = 2;
 
-  const [solution, updateSolution] = useState(defaultSolution);
-  const [solutionDisplay, updateSolutionDisplay] = useState(defaultSolution);
-  const [output, updateOutput] = useState(defaultOutput);
-  const [result, updateResult] = useState(null);
-  const [hasDecimal, updateHasDecimal] = useState(false);
-  const [hasOperator, updateHasOperator] = useState(false);
-  const [hasNegative, updateHasNegative] = useState(false);
-  const [operators, updateOperators] = useState(0);
+  const [solution, setSolution] = useState(defaultSolution);
+  const [solutionDisplay, setSolutionDisplay] = useState(defaultSolution);
+  
+  const [output, setOutput] = useState(defaultOutput);
+  const [result, setResult] = useState(null);
+
+  const [hasDecimal, setHasDecimal] = useState(false);
+
+  const [hasOperator, setHasOperator] = useState(false);
+  const [operators, setOperators] = useState(0);
 
   const buttonClick = (value) => {
-    if (value == "AC") {
+    if (value === "AC") {
       handleClear();
     } else if (value === "=") {
       handleEvaluation();
@@ -104,13 +105,13 @@ function App() {
   }
 
   const handleClear = () => {
-    updateSolution(defaultSolution);
-    updateSolutionDisplay(defaultSolution);
-    updateOutput(defaultOutput);
-    updateHasDecimal(false);
-    updateHasOperator(false);
-    updateResult(null);
-    updateOperators(0);
+    setSolution(defaultSolution);
+    setSolutionDisplay(defaultSolution);
+    setOutput(defaultOutput);
+    setHasDecimal(false);
+    setHasOperator(false);
+    setResult(null);
+    setOperators(0);
 
   }
 
@@ -120,13 +121,12 @@ function App() {
         const newResult = evaluate(solution)
         console.log("Sol:", solution, "\t Res:", newResult);
 
-        updateResult(newResult);
-        updateOutput(newResult);
-        updateSolution(defaultSolution);
-        updateSolutionDisplay(newResult);
-        updateHasDecimal(false);
-        updateHasOperator(false);
-        updateOperators(0);
+        setResult(newResult);
+        setOutput(newResult);
+        setSolution(defaultSolution);
+        setHasDecimal(false);
+        setHasOperator(false);
+        setOperators(0);
       }
     } catch (error) {
       return
@@ -136,38 +136,34 @@ function App() {
   const handleOperators = (value) => {
 
     let newSolution = solution + value;
-    updateOperators(operators + 1);
+    setOperators(operators + 1);
 
     if (result) {
       newSolution = result + newSolution;
     }
 
     if (hasOperator) {
-      if (value == "-" && operators >= 1) {
+      if (value === "-" && operators >= 1) {
         newSolution = solution + value;
-        updateHasNegative(true)
-        updateOperators(operators + 1);
+        setOperators(operators + 1);
 
-      } else if (value != "-" && operators == 2) {
+      } else if (value !== "-" && operators === 2) {
         newSolution = newSolution.slice(0, -3) + value;
-        updateHasNegative(false)
-        updateOperators(operators - 2);
+        setOperators(operators - 2);
       } else {
         newSolution = newSolution.slice(0, -2) + value;
-        updateHasNegative(false)
-        updateOperators(operators - 1);
-
+        setOperators(operators - 1);
       }
     }
 
 
 
-    updateSolutionDisplay(newSolution);
-    updateSolution(newSolution);
-    updateOutput(newSolution);
+    setSolutionDisplay(newSolution);
+    setSolution(newSolution);
+    setOutput(defaultOutput);
 
-    updateHasDecimal(false);
-    updateHasOperator(true);
+    setHasDecimal(false);
+    setHasOperator(true);
   }
 
   const handleDecimal = (value) => {
@@ -178,20 +174,21 @@ function App() {
 
     let newSolution = solution + value;
 
-    updateSolutionDisplay(newSolution);
-    updateSolution(newSolution);
-    updateOutput(newSolution);
-    updateHasDecimal(true);
+    setSolutionDisplay(newSolution);
+    setSolution(newSolution);
+    setOutput(newSolution);
+    setHasDecimal(true);
   }
 
   const handleNumbers = (value) => {
 
     const newSolution = solution === "0" ? value : solution + value;
+    const newOutput = output === "0" ? value : output + value;
 
-    updateSolutionDisplay(newSolution);
-    updateSolution(newSolution);
-    updateOutput(newSolution);
-    updateHasOperator(false);
+    setSolutionDisplay(newSolution);
+    setSolution(newSolution);
+    setOutput(newOutput);
+    setHasOperator(false);
   }
 
   return (
