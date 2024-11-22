@@ -76,14 +76,18 @@ function App() {
     },
   }
 
-  const defaultSolution = ""
-  const defaultOutput = "0"
+  const defaultSolution = "";
+  const defaultOutput = "0";
+  const maxOperator = 2;
 
   const [solution, updateSolution] = useState(defaultSolution);
   const [solutionDisplay, updateSolutionDisplay] = useState(defaultSolution);
   const [output, updateOutput] = useState(defaultOutput);
   const [result, updateResult] = useState(null);
   const [hasDecimal, updateHasDecimal] = useState(false);
+  const [hasOperator, updateHasOperator] = useState(false);
+  const [hasNegative, updateHasNegative] = useState(false);
+  const [operators, updateOperators] = useState(0);
 
   const buttonClick = (value) => {
     if (value == "AC") {
@@ -104,7 +108,10 @@ function App() {
     updateSolutionDisplay(defaultSolution);
     updateOutput(defaultOutput);
     updateHasDecimal(false);
+    updateHasOperator(false);
     updateResult(null);
+    updateOperators(0);
+
   }
 
   const handleEvaluation = () => {
@@ -117,7 +124,9 @@ function App() {
         updateOutput(newResult);
         updateSolution(defaultSolution);
         updateSolutionDisplay(newResult);
-
+        updateHasDecimal(false);
+        updateHasOperator(false);
+        updateOperators(0);
       }
     } catch (error) {
       return
@@ -125,13 +134,40 @@ function App() {
   }
 
   const handleOperators = (value) => {
-    updateHasDecimal(false);
 
     let newSolution = solution + value;
+    updateOperators(operators + 1);
+
+    if (result) {
+      newSolution = result + newSolution;
+    }
+
+    if (hasOperator) {
+      if (value == "-" && operators >= 1) {
+        newSolution = solution + value;
+        updateHasNegative(true)
+        updateOperators(operators + 1);
+
+      } else if (value != "-" && operators == 2) {
+        newSolution = newSolution.slice(0, -3) + value;
+        updateHasNegative(false)
+        updateOperators(operators - 2);
+      } else {
+        newSolution = newSolution.slice(0, -2) + value;
+        updateHasNegative(false)
+        updateOperators(operators - 1);
+
+      }
+    }
+
+
 
     updateSolutionDisplay(newSolution);
     updateSolution(newSolution);
     updateOutput(newSolution);
+
+    updateHasDecimal(false);
+    updateHasOperator(true);
   }
 
   const handleDecimal = (value) => {
@@ -146,7 +182,6 @@ function App() {
     updateSolution(newSolution);
     updateOutput(newSolution);
     updateHasDecimal(true);
-
   }
 
   const handleNumbers = (value) => {
@@ -156,6 +191,7 @@ function App() {
     updateSolutionDisplay(newSolution);
     updateSolution(newSolution);
     updateOutput(newSolution);
+    updateHasOperator(false);
   }
 
   return (
