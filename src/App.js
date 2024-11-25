@@ -8,71 +8,88 @@ function App() {
   const buttons = {
     1: {
       id: "clear",
-      value: "AC"
+      value: "AC",
+      type: "clear"
     },
     2: {
       id: "divide",
-      value: "/"
+      value: "/",
+      type:"operator"
     },
     3: {
       id: "multiply",
-      value: "*"
+      value: "*",
+      type:"operator"
     },
     4: {
       id: "seven",
-      value: "7"
+      value: "7",
+      type:"number"
     },
     5: {
       id: "eight",
-      value: "8"
+      value: "8",
+      type:"number"
     },
     6: {
       id: "nine",
-      value: "9"
+      value: "9",
+      type:"number"
     },
     7: {
       id: "subtract",
-      value: "-"
+      value: "-",
+      type:"operator"
     },
     8: {
       id: "four",
-      value: "4"
+      value: "4",
+      type:"number"
     },
     9: {
       id: "five",
-      value: "5"
+      value: "5",
+      type:"number"
     },
     10: {
       id: "six",
-      value: "6"
+      value: "6",
+      type:"number"
     },
     11: {
       id: "add",
-      value: "+"
+      value: "+",
+      type:"operator"
     },
     12: {
       id: "one",
-      value: "1"
+      value: "1",
+      type:"number"
     },
     13: {
       id: "two",
-      value: "2"
+      value: "2",
+      type:"number"
     },
     14: {
       id: "three",
-      value: "3"
+      value: "3",
+      type:"number"
     },
     15: {
       id: "equals",
-      value: "="
+      value: "=",
+      type:"equate"
     },
     16: {
       id: "zero",
-      value: "0"
+      value: "0",
+      type:"number"
     },
     17: {
       id: "decimal",
-      value: "."
+      value: ".",
+      type:"number"
     },
   }
 
@@ -210,13 +227,15 @@ function App() {
                 id={button.id}
                 onClick={() => buttonClick(button.value)}
                 key={index}
-                className='keyBtns'>
+                className='keyBtns'
+                data-set-btnType={button.type}>
                 {button.value}
               </button>
             )
           })
         }
       </div>
+      
     </div>
   );
 }
