@@ -1,6 +1,14 @@
 :root {
-  --calc-width: 300px;
+  --calc-width: 250px;
   --calc-columns: 4;
+  --bg-color: #1e0f41;
+  --text-color: black;
+  --text-color2: gray;
+  --calc-color: #ffe696;
+  --num-color: red;
+  --operator-color: blue;
+  --reset-color: green;
+  --equate-color: purple;
 }
 
 .App {
@@ -8,24 +16,32 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: var(--bg-color);
 }
 
-* {
-  outline: 1px red solid;
+html,
+body {
+  box-sizing: border-box;
 }
 
 #calculator {
   display: grid;
   grid-template-columns: repeat(var(--calc-columns), 1fr);
   width: var(--calc-width);
-  padding: 5px;
-  background-color: aqua;
+  padding: 10px;
+  background-color: var(--calc-color);
+  border-radius: 10px;
   font-family: 'Oxanium', sans-serif;
 }
 
 #calculator .keyBtns {
-  min-height: calc(var(--calc-width)/var(--calc-columns));
-  border: 2px solid dimgray;
+  min-height: calc(var(--calc-width)/var(--calc-columns) - 10px);
+  border: none;
+  font-family: 'Oxanium', sans-serif;
+  border-radius: 5px;
+  margin: 5px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 #calculator .keyBtns:hover {
@@ -41,7 +57,7 @@
 }
 
 #calculator #displayContainer p {
-  margin: 0px;
+  margin: 5px 0px;
   white-space: initial;
   word-wrap: break-word;
   min-height: 20px;
