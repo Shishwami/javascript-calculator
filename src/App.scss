@@ -4,11 +4,11 @@
     --bg-color: rgb(30, 15, 65);
     --text-color: black;
     --text-color2: gray;
-    --calc-color: rgb(255, 230, 150);
-    --num-color: red;
-    --operator-color: blue;
-    --reset-color: green;
-    --equate-color: purple;
+    --calc-color: rgb(255, 239, 188);
+    --num-color: rgb(255, 201, 139);
+    --operator-color: rgb(255, 173, 67);
+    --reset-color: rgb(255, 135, 80);
+    --equate-color: rgb(255, 230, 0);
 }
 
 .App {
@@ -22,6 +22,8 @@
 html,
 body {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 * {
@@ -36,24 +38,42 @@ body {
     background-color: var(--calc-color);
     border-radius: 10px;
 
-    font-family: 'Oxanium', sans-serif;
 
     .keyBtns {
-        min-height: calc(var(--calc-width)/var(--calc-columns) - 10px);
-        border: none;
-        font-family: 'Oxanium', sans-serif;
+        min-height: calc((var(--calc-width)/var(--calc-columns)) - 10px);
+
         border-radius: 5px;
+        border: none;
+
         margin: 5px;
+
+        font-family: 'Oxanium', sans-serif;
         font-weight: 600;
         font-size: 18px;
+
         &:hover {
             border: 2px solid white;
         }
     }
 
+    .keyBtns[data-set-btnType="number"] {
+        background-color: var(--num-color);
+    }
+
+    .keyBtns[data-set-btnType="operator"] {
+        background-color: var(--operator-color);
+    }
+
+    .keyBtns[data-set-btnType="clear"] {
+        background-color: var(--reset-color);
+    }
+
+    .keyBtns[data-set-btnType="equate"] {
+        background-color: var(--equate-color);
+    }
+
     #displayContainer {
         grid-column: span 4;
-        background-color: lightgrey;
         padding: 5px;
         display: flex;
         flex-direction: column;
@@ -64,8 +84,20 @@ body {
             word-wrap: break-word;
             min-height: 20px;
             text-align: right;
+            font-family: 'Oxanium', sans-serif;
+            overflow: hidden;
         }
 
+        #solution {
+            color: var(--text-color2);
+            font-size: 15px;
+        }
+
+        #display {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 20px;
+        }
     }
 
     #clear,
