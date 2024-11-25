@@ -4,6 +4,7 @@
     --bg-color: rgb(30, 15, 65);
     --text-color: black;
     --text-color2: gray;
+    --text-color3: white;
     --calc-color: rgb(255, 239, 188);
     --num-color: rgb(255, 201, 139);
     --operator-color: rgb(255, 173, 67);
@@ -13,8 +14,12 @@
 
 .App {
     display: flex;
+    flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
+
     height: 100vh;
     background-color: var(--bg-color);
 }
@@ -110,4 +115,18 @@ body {
     }
 
 
+}
+
+#footer {
+    color: var(--text-color3);
+    padding: 15px;
+    a {
+        text-decoration: none;
+        color: var(--text-color3);
+        font-size: 15px;
+        font-weight: 600;
+    }
+    i{
+        font-size: 20px;
+    }
 }
