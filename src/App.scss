@@ -37,26 +37,17 @@
         grid-column: span 4;
         background-color: lightgrey;
         padding: 5px;
-        min-height: calc(var(--calc-width)/var(--calc-columns));
         display: flex;
         flex-direction: column;
 
         p {
-            margin: 0;
-            flex: 1;
-
-            max-width: calc(var(--calc-width) - 10px);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-
-            text-indent: 10px;
-            margin-left: auto;
-
-            display: flex;
-            align-items: center;
-
+            margin:  0px;
+            white-space: initial;
+            word-wrap: break-word;
+            min-height: 20px;
+            text-align: right;
         }
+        
     }
 
     #clear,
