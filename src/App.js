@@ -81,7 +81,7 @@ function App() {
 
   const [solution, setSolution] = useState(defaultSolution);
   const [solutionDisplay, setSolutionDisplay] = useState(defaultSolution);
-  
+
   const [output, setOutput] = useState(defaultOutput);
   const [result, setResult] = useState(null);
 
@@ -129,11 +129,15 @@ function App() {
         setOperators(0);
       }
     } catch (error) {
-      return
     }
   }
 
   const handleOperators = (value) => {
+
+
+    if (!solution && !result) {
+      return
+    }
 
     let newSolution = solution + value;
     setOperators(operators + 1);
@@ -141,7 +145,6 @@ function App() {
     if (result) {
       newSolution = result + newSolution;
     }
-
     if (hasOperator) {
       if (value === "-" && operators >= 1) {
         newSolution = solution + value;
@@ -173,10 +176,11 @@ function App() {
     }
 
     let newSolution = solution + value;
+    let newOutput = output + value;
 
     setSolutionDisplay(newSolution);
     setSolution(newSolution);
-    setOutput(newSolution);
+    setOutput(newOutput);
     setHasDecimal(true);
   }
 
