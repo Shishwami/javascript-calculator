@@ -235,7 +235,7 @@ function App() {
           })
         }
       </div>
-      
+      <footer id="footer">by<a href='https://github.com/Shishwami'> <i class="fa fa-github"></i> Shishwami</a></footer>
     </div>
   );
 }
