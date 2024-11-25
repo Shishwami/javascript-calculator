@@ -1,5 +1,5 @@
 :root {
-  --calc-width: 250px;
+  --calc-width: 300px;
   --calc-columns: 4;
 }
 
@@ -10,12 +10,17 @@
   height: 100vh;
 }
 
+* {
+  outline: 1px red solid;
+}
+
 #calculator {
   display: grid;
   grid-template-columns: repeat(var(--calc-columns), 1fr);
   width: var(--calc-width);
   padding: 5px;
   background-color: aqua;
+  font-family: 'Oxanium', sans-serif;
 }
 
 #calculator .keyBtns {
@@ -31,14 +36,22 @@
   grid-column: span 4;
   background-color: lightgrey;
   padding: 5px;
+  min-height: calc(var(--calc-width)/var(--calc-columns));
+  display: flex;
+  flex-direction: column;
 }
 
 #calculator #displayContainer p {
   margin: 0;
+  flex: 1;
+  max-width: calc(var(--calc-width) - 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   text-indent: 10px;
-  font-size: 20px;
-  font-weight: 700;
-  min-height: calc(var(--calc-width)/var(--calc-columns)/2);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 #calculator #clear,
