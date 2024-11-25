@@ -19,7 +19,7 @@ The calculator allows users to perform basic arithmetic operations with precisio
 2. Run `npm install` to install dependencies.
 3. Run `npm start` to launch the app locally.
 
-Alternatively, you can view the live version of the project at [this link](https://shishwami.github.io/MarkdownPreviewer/).
+Alternatively, you can view the live version of the project at [this link](https://shishwami.github.io/javascript-calculator/).
 
 ## Usage
 
