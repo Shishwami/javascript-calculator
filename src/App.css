@@ -4,11 +4,11 @@
   --bg-color: #1e0f41;
   --text-color: black;
   --text-color2: gray;
-  --calc-color: #ffe696;
-  --num-color: red;
-  --operator-color: blue;
-  --reset-color: green;
-  --equate-color: purple;
+  --calc-color: #ffefbc;
+  --num-color: #ffc98b;
+  --operator-color: #ffad43;
+  --reset-color: #ff8750;
+  --equate-color: #ffe600;
 }
 
 .App {
@@ -22,6 +22,8 @@
 html,
 body {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 #calculator {
@@ -31,15 +33,14 @@ body {
   padding: 10px;
   background-color: var(--calc-color);
   border-radius: 10px;
-  font-family: 'Oxanium', sans-serif;
 }
 
 #calculator .keyBtns {
-  min-height: calc(var(--calc-width)/var(--calc-columns) - 10px);
-  border: none;
-  font-family: 'Oxanium', sans-serif;
+  min-height: calc((var(--calc-width)/var(--calc-columns)) - 10px);
   border-radius: 5px;
+  border: none;
   margin: 5px;
+  font-family: 'Oxanium', sans-serif;
   font-weight: 600;
   font-size: 18px;
 }
@@ -48,9 +49,24 @@ body {
   border: 2px solid white;
 }
 
+#calculator .keyBtns[data-set-btnType="number"] {
+  background-color: var(--num-color);
+}
+
+#calculator .keyBtns[data-set-btnType="operator"] {
+  background-color: var(--operator-color);
+}
+
+#calculator .keyBtns[data-set-btnType="clear"] {
+  background-color: var(--reset-color);
+}
+
+#calculator .keyBtns[data-set-btnType="equate"] {
+  background-color: var(--equate-color);
+}
+
 #calculator #displayContainer {
   grid-column: span 4;
-  background-color: lightgrey;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -62,6 +78,19 @@ body {
   word-wrap: break-word;
   min-height: 20px;
   text-align: right;
+  font-family: 'Oxanium', sans-serif;
+  overflow: hidden;
+}
+
+#calculator #displayContainer #solution {
+  color: var(--text-color2);
+  font-size: 15px;
+}
+
+#calculator #displayContainer #display {
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 20px;
 }
 
 #calculator #clear,
